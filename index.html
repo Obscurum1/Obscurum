@@ -4,15 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Obscurum — Cybercrime Exposure Intelligence</title>
-  <meta name="description" content="Obscurum helps brands detect cybercrime exposure: leaked credentials, impersonation domains, phishing infrastructure, and fraud signals—so you can respond before damage spreads." />
-  <meta name="theme-color" content="#0b0b12" />
+  <meta name="description" content="Obscurum provides cybercrime exposure intelligence: leaked credentials, impersonation domains, phishing infrastructure, fraud signals, and actionable response playbooks for online businesses." />
+  <meta name="theme-color" content="#070710" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Obscurum — Cybercrime Exposure Intelligence" />
-  <meta property="og:description" content="Detect leaks, impersonation, phishing, and fraud signals targeting your brand. Evidence-first reports and clear next actions." />
+  <meta property="og:description" content="Detect leaks, impersonation, phishing, and fraud signals targeting your brand. Evidence-first reports, clear next actions." />
   <meta property="og:type" content="website" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
@@ -20,103 +19,204 @@
   <style>
     :root{
       --bg:#070710;
+      --bg2:#0a0a14;
       --panel: rgba(255,255,255,.06);
       --panel2: rgba(255,255,255,.04);
       --line: rgba(255,255,255,.10);
+      --line2: rgba(255,255,255,.14);
       --text:#eef0ff;
       --muted: rgba(238,240,255,.72);
       --muted2: rgba(238,240,255,.60);
+
       --accent1:#a78bfa;
       --accent2:#60a5fa;
+      --accent3:#34d399;
+
       --good:#34d399;
       --warn:#fbbf24;
       --bad:#fb7185;
+
       --shadow: 0 24px 80px rgba(0,0,0,.55);
+      --shadow2: 0 10px 35px rgba(0,0,0,.35);
+
       --r: 18px;
-      --max: 1120px;
+      --max: 1160px;
+
+      --glow1: 0 0 26px rgba(167,139,250,.30);
+      --glow2: 0 0 26px rgba(96,165,250,.26);
+      --glow3: 0 0 26px rgba(52,211,153,.20);
     }
+
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--text);background:var(--bg)}
+    html,body{
+      margin:0;padding:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background:var(--bg);
+      scroll-behavior:smooth;
+    }
     a{color:inherit}
+    ::selection{background: rgba(167,139,250,.30)}
+
+    /* Futuristic background */
     .bg{
+      position:fixed; inset:0; z-index:-2;
+      background:
+        radial-gradient(950px 650px at 15% 0%, rgba(167,139,250,.22), transparent 62%),
+        radial-gradient(950px 650px at 90% 15%, rgba(96,165,250,.18), transparent 58%),
+        radial-gradient(950px 650px at 50% 100%, rgba(52,211,153,.10), transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,.03), transparent 34%),
+        var(--bg);
+    }
+    .gridlines{
       position:fixed; inset:0; z-index:-1;
       background:
-        radial-gradient(900px 600px at 15% 0%, rgba(167,139,250,.22), transparent 60%),
-        radial-gradient(900px 600px at 90% 15%, rgba(96,165,250,.18), transparent 55%),
-        radial-gradient(900px 600px at 50% 100%, rgba(52,211,153,.10), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,.02), transparent 30%);
+        linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: radial-gradient(700px 420px at 50% 10%, rgba(0,0,0,1), rgba(0,0,0,0));
+      opacity:.7;
+      pointer-events:none;
     }
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 20px 90px;}
-    .nav{display:flex; justify-content:space-between; align-items:center; gap:14px; padding:6px 0 18px;}
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 20px 100px;}
+
+    /* Top Nav */
+    .nav{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:14px; padding:8px 0 18px;
+      position:sticky; top:0;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(7,7,16,.82), rgba(7,7,16,.55));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      z-index:10;
+    }
+    .navInner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:10px 20px;
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
     .brand{display:flex; gap:12px; align-items:center; text-decoration:none}
     .mark{
       width:40px; height:40px; border-radius:12px;
       background:linear-gradient(135deg,var(--accent1),var(--accent2));
-      box-shadow: 0 18px 55px rgba(0,0,0,.55);
+      box-shadow: 0 18px 55px rgba(0,0,0,.55), var(--glow1), var(--glow2);
       border:1px solid rgba(255,255,255,.18);
     }
-    .brand strong{letter-spacing:.5px}
-    .brand span{display:block; font-size:12px; color:var(--muted)}
-    .navlinks{display:flex; gap:16px; flex-wrap:wrap; font-size:13px; color:var(--muted)}
+    .brand strong{letter-spacing:.6px}
+    .brand span{display:block; font-size:12px; color:var(--muted); margin-top:2px}
+    .navlinks{
+      display:flex; gap:16px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+      align-items:center;
+      justify-content:flex-end;
+    }
     .navlinks a{text-decoration:none; opacity:.9}
     .navlinks a:hover{opacity:1; color:var(--text)}
+    .navlinks .miniCta{display:none}
+
+    /* Buttons */
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       padding:12px 14px; border-radius:14px;
-      font-weight:800; font-size:13px; text-decoration:none;
+      font-weight:900; font-size:13px; text-decoration:none;
       border:1px solid transparent;
-      gap:10px;
-      cursor:pointer;
+      gap:10px; cursor:pointer;
+      transition: transform .08s ease, filter .12s ease, border-color .12s ease;
+      user-select:none;
     }
+    .btn:active{transform: translateY(1px)}
     .btnPrimary{
       background:linear-gradient(135deg,var(--accent1),var(--accent2));
       color:#0b0b12;
-      box-shadow: 0 18px 55px rgba(0,0,0,.35);
+      box-shadow: 0 18px 55px rgba(0,0,0,.35), var(--glow1);
     }
-    .btnPrimary:hover{filter:saturate(1.05) brightness(1.03)}
+    .btnPrimary:hover{filter:saturate(1.08) brightness(1.04)}
     .btnGhost{
       background:rgba(255,255,255,.03);
-      border-color:rgba(255,255,255,.12);
+      border-color:rgba(255,255,255,.14);
       color:var(--text);
     }
-    .btnGhost:hover{border-color:rgba(255,255,255,.22)}
+    .btnGhost:hover{border-color:rgba(255,255,255,.26)}
+    .btnGreen{
+      background:linear-gradient(135deg, rgba(52,211,153,.92), rgba(96,165,250,.70));
+      color:#071016;
+      box-shadow: 0 18px 55px rgba(0,0,0,.35), var(--glow3);
+    }
+    .btnGreen:hover{filter:saturate(1.06) brightness(1.03)}
+    .icon{
+      width:16px; height:16px; display:inline-block; flex:0 0 16px;
+    }
+    .icon svg{width:16px;height:16px; fill: currentColor}
+
+    /* Pills & tags */
     .pill{
       display:inline-flex; align-items:center; gap:10px;
       padding:8px 12px; border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
       background:rgba(255,255,255,.03);
-      font-size:12px; font-weight:800; letter-spacing:.7px;
+      font-size:12px; font-weight:900; letter-spacing:.7px;
       text-transform:uppercase;
-      color: rgba(238,240,255,.85);
+      color: rgba(238,240,255,.86);
     }
     .dot{width:8px;height:8px;border-radius:999px;background:linear-gradient(135deg,var(--accent1),var(--accent2))}
-    .gridHero{
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:16px;
-      margin-top:10px;
+    .tagRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+    .tag{
+      font-size:12px; color:rgba(238,240,255,.86);
+      padding:7px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.03);
     }
+
+    /* Cards + sections */
     .card{
       border:1px solid rgba(255,255,255,.10);
       background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       border-radius:var(--r);
       box-shadow: var(--shadow);
     }
+    .cardSoft{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      border-radius:var(--r);
+      box-shadow: var(--shadow2);
+    }
+
+    .section{margin-top:48px}
+    .section h2{margin:0 0 10px; font-size:30px; letter-spacing:-.6px}
+    .lead{margin:0 0 16px; color:var(--muted); font-size:16px; line-height:1.75}
+    .muted{color:var(--muted)}
+    .muted2{color:var(--muted2)}
+
+    /* Hero grid */
+    .gridHero{
+      display:grid;
+      grid-template-columns: 1.28fr .72fr;
+      gap:16px;
+      margin-top:22px;
+    }
     .heroMain{padding:26px}
     h1{
       margin:10px 0 10px;
-      font-size:46px;
-      line-height:1.05;
-      letter-spacing:-1px;
+      font-size:48px;
+      line-height:1.04;
+      letter-spacing:-1.2px;
     }
     .sub{
       margin:0 0 16px;
       color:var(--muted);
       font-size:18px;
-      line-height:1.55;
+      line-height:1.65;
     }
+
+    /* Bullet list */
     .bullets{display:grid; gap:10px; margin:16px 0 18px; padding:0; list-style:none}
-    .bullets li{display:flex; gap:10px; font-size:14px; line-height:1.55; color:rgba(238,240,255,.88)}
+    .bullets li{display:flex; gap:10px; font-size:14px; line-height:1.6; color:rgba(238,240,255,.90)}
     .check{
       width:22px;height:22px;border-radius:10px;
       background:rgba(52,211,153,.12);
@@ -126,8 +226,18 @@
       margin-top:2px;
     }
     .check svg{width:14px;height:14px; fill: var(--good)}
-    .ctaRow{display:flex; gap:12px; flex-wrap:wrap; margin-top:8px}
-    .legalNote{margin:14px 0 0; color:var(--muted2); font-size:13px; line-height:1.6}
+    .ctaRow{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
+    .legalNote{
+      margin:14px 0 0;
+      color:var(--muted2);
+      font-size:13px;
+      line-height:1.7;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+    }
+
     .heroSide{padding:18px}
     .statGrid{display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:12px}
     .mini{
@@ -136,25 +246,89 @@
       border:1px solid rgba(255,255,255,.10);
     }
     .mini strong{display:block; font-size:13px; margin-bottom:6px}
-    .mini p{margin:0; font-size:13px; line-height:1.5; color:var(--muted)}
-    .section{margin-top:44px}
-    .section h2{margin:0 0 10px; font-size:28px; letter-spacing:-.4px}
-    .lead{margin:0 0 16px; color:var(--muted); font-size:16px; line-height:1.65}
+    .mini p{margin:0; font-size:13px; line-height:1.55; color:var(--muted)}
+    .kpi{
+      margin-top:12px;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(96,165,250,.10), rgba(0,0,0,.16));
+    }
+    .kpi b{display:block; font-size:13px; margin-bottom:6px}
+    .kpi .row{
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      color:rgba(238,240,255,.88);
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    /* Layout grids */
+    .cols2{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
     .cols3{display:grid; grid-template-columns: 1fr 1fr 1fr; gap:14px}
+    .cols4{display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap:14px}
+
     .box{
       padding:18px; border-radius:18px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(255,255,255,.03);
     }
     .box h3{margin:0 0 6px; font-size:16px}
-    .box p{margin:0; color:var(--muted); font-size:14px; line-height:1.6}
-    .tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
-    .tag{
-      font-size:12px; color:rgba(238,240,255,.86);
-      padding:7px 10px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
+    .box p{margin:0; color:var(--muted); font-size:14px; line-height:1.75}
+    .box ul{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:14px;
+    }
+    .box li{margin:6px 0}
+
+    /* Methodology table */
+    .tableWrap{
+      overflow:auto;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:860px;
+    }
+    th, td{
+      text-align:left;
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      vertical-align:top;
+      font-size:13px;
+      line-height:1.6;
+    }
+    th{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      color:rgba(238,240,255,.80);
       background:rgba(255,255,255,.03);
     }
+    td{color:rgba(238,240,255,.88)}
+    td .muted{font-size:12px; color:rgba(238,240,255,.62)}
+
+    /* Severity chips */
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.4px;
+      background:rgba(255,255,255,.03);
+    }
+    .chip.good{border-color: rgba(52,211,153,.30); color: rgba(52,211,153,.95); background: rgba(52,211,153,.08)}
+    .chip.warn{border-color: rgba(251,191,36,.30); color: rgba(251,191,36,.95); background: rgba(251,191,36,.08)}
+    .chip.bad{border-color: rgba(251,113,133,.30); color: rgba(251,113,133,.95); background: rgba(251,113,133,.08)}
+
+    /* Process steps */
     .process{display:grid; grid-template-columns:1fr 1fr; gap:14px}
     .step{
       padding:18px; border-radius:18px;
@@ -163,34 +337,69 @@
     }
     .n{
       display:inline-flex; align-items:center; justify-content:center;
-      width:30px;height:30px;border-radius:12px;
+      width:32px;height:32px;border-radius:12px;
       background:linear-gradient(135deg,var(--accent1),var(--accent2));
       color:#0b0b12;
       font-weight:900;
       margin-bottom:10px;
+      box-shadow: var(--glow1);
     }
+    .step b{display:block; margin-bottom:6px}
+    .step p{margin:0; color:var(--muted); line-height:1.75; font-size:14px}
+
+    /* Pricing */
     .pricing{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px}
     .price{
       padding:18px; border-radius:20px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(255,255,255,.03);
+      position:relative;
+      overflow:hidden;
     }
+    .price:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(400px 220px at 10% 0%, rgba(167,139,250,.22), transparent 55%),
+                  radial-gradient(400px 220px at 90% 0%, rgba(96,165,250,.18), transparent 55%);
+      opacity:.25;
+      pointer-events:none;
+    }
+    .price > *{position:relative}
     .featured{
-      border-color:rgba(167,139,250,.45);
+      border-color:rgba(167,139,250,.48);
       background:linear-gradient(180deg, rgba(167,139,250,.14), rgba(255,255,255,.03));
+      box-shadow: var(--shadow), var(--glow1);
     }
+    .price h3{margin:0 0 6px}
     .amt{font-size:30px; font-weight:900; margin:10px 0 10px}
-    .amt span{font-size:13px; color:var(--muted); font-weight:800}
-    .ul{margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.7; font-size:14px}
-    .faq{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .amt span{font-size:13px; color:var(--muted); font-weight:900}
+    .ul{margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.75; font-size:14px}
+    .ul li{margin:6px 0}
+    .smallNote{margin-top:10px; color:rgba(238,240,255,.62); font-size:12px; line-height:1.7}
+
+    /* Expandables */
     details{
       border:1px solid rgba(255,255,255,.10);
       background:rgba(255,255,255,.03);
       border-radius:18px;
       padding:14px 14px;
     }
-    summary{cursor:pointer; font-weight:900}
-    details p{margin:10px 0 0; color:var(--muted); font-size:14px; line-height:1.65}
+    summary{
+      cursor:pointer;
+      font-weight:900;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p, details li{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.75;
+    }
+    details ul{margin:10px 0 0; padding-left:18px}
+    .faq{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+
+    /* Contact */
     .callout{
       padding:20px;
       border-radius:20px;
@@ -201,15 +410,18 @@
       justify-content:space-between;
       gap:14px;
       flex-wrap:wrap;
+      box-shadow: var(--shadow2);
     }
-    .callout p{margin:0; color:var(--muted); line-height:1.65}
+    .callout p{margin:0; color:var(--muted); line-height:1.75}
+    .callout h2{margin:0 0 8px; font-size:28px}
+
     form{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
       margin-top:14px;
     }
-    input, textarea{
+    input, textarea, select{
       width:100%;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.12);
@@ -219,34 +431,70 @@
       font-size:14px;
       outline:none;
     }
-    textarea{grid-column:1 / -1; min-height:140px; resize:vertical}
+    textarea{grid-column:1 / -1; min-height:160px; resize:vertical}
     .formActions{grid-column:1 / -1; display:flex; gap:12px; flex-wrap:wrap}
+    .hint{margin-top:10px; color:rgba(238,240,255,.62); font-size:12px; line-height:1.7}
+
+    /* Footer */
     .footer{
-      margin-top:26px;
-      padding-top:16px;
+      margin-top:30px;
+      padding-top:18px;
       border-top:1px solid rgba(255,255,255,.10);
       color:rgba(238,240,255,.62);
       font-size:12px;
-      line-height:1.7;
+      line-height:1.75;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
     }
-    @media (max-width: 980px){
+    .footer a{color:rgba(238,240,255,.82)}
+    .social{display:flex; gap:12px; align-items:center}
+    .social a{
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      text-decoration:none;
+      color:rgba(238,240,255,.82);
+      font-weight:800;
+      font-size:12px;
+    }
+    .social a:hover{border-color:rgba(255,255,255,.22); color:rgba(238,240,255,.95)}
+
+    /* Subtle reveal */
+    .reveal{opacity:0; transform: translateY(10px); transition: opacity .55s ease, transform .55s ease}
+    .reveal.in{opacity:1; transform:none}
+
+    /* Responsive */
+    @media (max-width: 1020px){
       .gridHero{grid-template-columns:1fr}
-      .cols3,.pricing{grid-template-columns:1fr}
-      .process,.faq{grid-template-columns:1fr}
-      h1{font-size:40px}
+      .cols4{grid-template-columns:1fr 1fr}
+      .cols3{grid-template-columns:1fr}
+      .cols2{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .process{grid-template-columns:1fr}
+      .faq{grid-template-columns:1fr}
+      h1{font-size:42px}
+      .navlinks a{display:none}
+      .navlinks .miniCta{display:inline-flex}
     }
     @media (max-width: 520px){
       h1{font-size:34px}
       form{grid-template-columns:1fr}
+      .statGrid{grid-template-columns:1fr}
+      .cols4{grid-template-columns:1fr}
     }
   </style>
 </head>
+
 <body>
   <div class="bg" aria-hidden="true"></div>
+  <div class="gridlines" aria-hidden="true"></div>
 
-  <div class="wrap">
-    <!-- NAV -->
-    <div class="nav">
+  <!-- Sticky NAV -->
+  <div class="nav" role="navigation" aria-label="Primary navigation">
+    <div class="navInner">
       <a class="brand" href="#top" aria-label="Obscurum Home">
         <div class="mark" aria-hidden="true"></div>
         <div>
@@ -254,24 +502,31 @@
           <span>Cybercrime Exposure Intelligence</span>
         </div>
       </a>
+
       <div class="navlinks">
-        <a href="#what">What</a>
+        <a href="#capabilities">Capabilities</a>
         <a href="#deliverables">Deliverables</a>
-        <a href="#process">Process</a>
+        <a href="#methodology">Methodology</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
+        <a class="btn btnGhost miniCta" href="#contact">Book a call</a>
         <a class="btn btnGhost" href="#contact">Contact</a>
       </div>
     </div>
+  </div>
 
+  <div class="wrap">
     <!-- HERO -->
     <div id="top" class="gridHero">
-      <div class="card heroMain">
+      <div class="card heroMain reveal">
         <div class="pill"><span class="dot"></span> External visibility into cybercrime targeting your brand</div>
-        <h1>Detect leaks, impersonation, and fraud signals — before it becomes a costly incident.</h1>
+
+        <h1>Detect leaks, impersonation, and fraud signals — before it becomes an incident.</h1>
+
         <p class="sub">
-          Obscurum monitors lawful intelligence sources for credential exposure, brand impersonation infrastructure, phishing activity,
-          and abuse patterns. You get evidence, prioritization, and exact next actions in plain English.
+          Obscurum monitors lawful intelligence sources for cybercrime signals connected to your business:
+          <b>credential exposure</b>, <b>brand impersonation</b>, <b>phishing infrastructure</b>, and <b>fraud/abuse patterns</b>.
+          You get <b>evidence</b>, <b>prioritization</b>, and <b>exact next actions</b> in plain English.
         </p>
 
         <ul class="bullets">
@@ -279,60 +534,88 @@
             <div class="check" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
             </div>
-            <div><b>Credential exposure:</b> staff/customer credentials tied to your domain + breach/leak indicators.</div>
+            <div><b>Credential exposure:</b> find domain-tied leaks and risk patterns that increase account takeover and internal compromise.</div>
           </li>
           <li>
             <div class="check" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
             </div>
-            <div><b>Impersonation & phishing:</b> look-alike domains, fake social profiles, phishing pages, brand abuse.</div>
+            <div><b>Impersonation & phishing:</b> detect look-alike domains, fake pages, brand abuse, and common attacker infrastructure.</div>
           </li>
           <li>
             <div class="check" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
             </div>
-            <div><b>Fraud signals:</b> early indicators that often precede account takeover, automation abuse, and chargeback spikes.</div>
+            <div><b>Fraud/abuse signals:</b> identify patterns that often precede chargeback spikes, bot-driven abuse, and ATO waves.</div>
           </li>
           <li>
             <div class="check" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
             </div>
-            <div><b>Action plan:</b> what’s real vs noise, what’s urgent, and the exact mitigation steps.</div>
+            <div><b>Response playbooks:</b> what to reset, what to lock down, what to monitor next, and when to notify customers.</div>
           </li>
         </ul>
 
         <div class="ctaRow">
-          <a class="btn btnPrimary" href="#pricing">See packages</a>
-          <a class="btn btnGhost" href="#contact">Book a 15-min call</a>
+          <a class="btn btnPrimary" href="#pricing">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 14.93V18h-2v-1.07A8 8 0 0 1 4.07 13H6.1A6 6 0 0 0 18 12a6 6 0 0 0-6-6 5.99 5.99 0 0 0-5.9 5H4.07A8 8 0 0 1 11 4.07V3h2v1.07A8 8 0 0 1 19.93 11H17.9A6 6 0 0 0 6 12a6 6 0 0 0 6 6Z"/></svg>
+            </span>
+            See packages
+          </a>
+          <a class="btn btnGhost" href="#contact">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm1 17a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V10h16Zm0-13H4V7a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1Z"/></svg>
+            </span>
+            Book a 15-min call
+          </a>
+          <a class="btn btnGreen" href="#capabilities">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2 1 7l11 5 9-4.09V17h2V7L12 2Zm-8.5 7L12 13l8.5-4L12 5 3.5 9ZM12 15 3 10.91V17a4 4 0 0 0 2 3.46l7 4.04 7-4.04A4 4 0 0 0 21 17v-6.09L12 15Z"/></svg>
+            </span>
+            What exactly we do
+          </a>
         </div>
 
         <div class="legalNote">
-          <b>Important:</b> Obscurum does not hack systems, infiltrate criminal groups, or buy stolen data. This is lawful OSINT + threat intelligence.
+          <b>Important:</b> Obscurum does not hack systems, infiltrate criminal groups, or buy stolen data.
+          We use lawful OSINT + threat intelligence techniques to identify credible external exposure signals and provide response guidance.
         </div>
       </div>
 
-      <div class="card heroSide">
-        <div class="pill"><span class="dot"></span> Typical findings for online businesses</div>
+      <div class="card heroSide reveal">
+        <div class="pill"><span class="dot"></span> Why this matters (operator view)</div>
+
         <div class="statGrid">
           <div class="mini">
-            <strong>Reused passwords</strong>
-            <p>Credentials show up in breach datasets and get tried against business tools.</p>
+            <strong>Stop “surprise incidents”</strong>
+            <p>Most breaches are discovered late. Early signals let you reduce blast radius fast.</p>
           </div>
           <div class="mini">
-            <strong>Look-alike domains</strong>
-            <p>Impersonation sites harvesting logins, payments, and customer trust.</p>
+            <strong>Reduce ATO & abuse</strong>
+            <p>Credential leaks + impersonation drive account takeover and customer fraud.</p>
           </div>
           <div class="mini">
-            <strong>Phishing kits</strong>
-            <p>Infrastructure reused across campaigns targeting your customers.</p>
+            <strong>Protect revenue</strong>
+            <p>Fraud and phishing impacts conversion, chargebacks, and support costs.</p>
           </div>
           <div class="mini">
-            <strong>Silent abuse</strong>
-            <p>Signals of automation and account takeover before support tickets explode.</p>
+            <strong>Protect reputation</strong>
+            <p>Brand impersonation spreads. Catching it early changes outcomes.</p>
           </div>
         </div>
 
-        <div class="tags">
+        <div class="kpi">
+          <b>Turn uncertainty into decisions</b>
+          <div class="row">
+            <div>✔ Evidence, not fear</div>
+            <div>✔ Prioritized actions</div>
+            <div>✔ Clear ownership (you vs IT)</div>
+            <div>✔ Optional monitoring</div>
+          </div>
+        </div>
+
+        <div class="tagRow">
           <span class="tag">Remote-first</span>
           <span class="tag">Evidence-first</span>
           <span class="tag">Plain English</span>
@@ -341,142 +624,383 @@
       </div>
     </div>
 
-    <!-- WHAT -->
-    <div id="what" class="section">
-      <h2>What Obscurum is (and isn’t)</h2>
+    <!-- CAPABILITIES -->
+    <div id="capabilities" class="section reveal">
+      <h2>Capabilities</h2>
       <p class="lead">
-        Most businesses only discover cybercrime activity after it’s already expensive: chargebacks, account takeovers, customer phishing,
-        brand damage, or an insurance/legal mess. Obscurum gives you early warning and clear response steps.
+        This is the “exactly what we do” section. Obscurum provides external cybercrime visibility by combining
+        structured OSINT workflows with threat-intel style triage and response planning.
       </p>
-      <div class="cols3">
-        <div class="box">
-          <h3>What it is</h3>
-          <p>External cybercrime visibility: monitoring for leaks, impersonation, phishing, and fraud signals connected to your brand.</p>
-        </div>
-        <div class="box">
-          <h3>What it’s not</h3>
-          <p>Not penetration testing. Not a SOC. Not “we’ll secure everything.” It’s targeted intelligence + action.</p>
-        </div>
-        <div class="box">
-          <h3>Who it’s for</h3>
-          <p>E-commerce, SaaS, online platforms, and service businesses that rely on reputation, accounts, and customer trust.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- DELIVERABLES -->
-    <div id="deliverables" class="section">
-      <h2>Deliverables</h2>
-      <p class="lead">You receive outputs you can act on immediately — not a vague “risk assessment.”</p>
 
       <div class="cols3">
         <div class="box">
-          <h3>Exposure Report (PDF)</h3>
-          <p>Executive summary, evidence, risk scoring, and a prioritized “do this now” list.</p>
+          <h3>Credential Exposure Intelligence</h3>
+          <p>Identify and assess domain-tied credential exposure and risk patterns that enable account takeover and internal access.</p>
+          <ul>
+            <li>Domain / email-pattern breach exposure checks</li>
+            <li>Password reuse indicators (risk-based)</li>
+            <li>High-risk access targets mapping (email + SaaS surface)</li>
+            <li>Recommended reset + MFA enforcement sequences</li>
+          </ul>
         </div>
+
         <div class="box">
-          <h3>Evidence Pack</h3>
-          <p>Screenshots/metadata and context where lawful: impersonation domains, phishing pages, credential indicators, abuse signals.</p>
+          <h3>Impersonation & Brand Abuse</h3>
+          <p>Detect and track infrastructure used to impersonate your brand and steal logins, payments, or trust.</p>
+          <ul>
+            <li>Look-alike/typosquat domains (registration + hosting indicators)</li>
+            <li>Phishing page discovery and similarity checks</li>
+            <li>Fake social profiles / brand abuse signals (where applicable)</li>
+            <li>Takedown guidance: registrar/host/platform workflows</li>
+          </ul>
         </div>
+
         <div class="box">
-          <h3>Response Playbook</h3>
-          <p>Exact steps: resets, MFA enforcement, access revocation, takedown requests, and communication guidance.</p>
+          <h3>Fraud & Abuse Signals</h3>
+          <p>Surface indicators linked to abusive automation and fraud that often spikes before support/chargebacks do.</p>
+          <ul>
+            <li>Account takeover risk indicators (external)</li>
+            <li>Credential stuffing “pressure” signals (risk-based)</li>
+            <li>Brand-targeted scam vectors (where observable)</li>
+            <li>Mitigation checklist for operations + engineering + CX</li>
+          </ul>
         </div>
       </div>
 
       <div class="cols3" style="margin-top:14px;">
         <div class="box">
-          <h3>Impersonation & Brand Abuse Scan</h3>
-          <p>Look-alike domains, typosquats, fake social profiles, and brand impersonation vectors.</p>
+          <h3>Attack Path Explanation</h3>
+          <p>We explain plausible attacker paths in business terms. No theatrics. Just “how this turns into a problem.”</p>
+          <ul>
+            <li>What’s the attacker likely trying to monetize?</li>
+            <li>What’s the most probable next step?</li>
+            <li>What’s the fastest containment action?</li>
+          </ul>
         </div>
+
         <div class="box">
-          <h3>Credential Exposure Review</h3>
-          <p>Domain-tied exposures and patterns that raise the risk of account takeover and internal compromise.</p>
+          <h3>Prioritization & Severity</h3>
+          <p>Not all findings matter. We score and prioritize by real-world impact and likelihood.</p>
+          <ul>
+            <li><span class="chip bad">Critical</span> Immediate action recommended</li>
+            <li><span class="chip warn">High</span> Action within 7 days</li>
+            <li><span class="chip good">Medium</span> Fix in next cycle</li>
+          </ul>
         </div>
+
         <div class="box">
-          <h3>Walkthrough Call</h3>
-          <p>A live review of findings and decisions: what’s urgent, what’s optional, what’s noise.</p>
+          <h3>Ongoing Monitoring</h3>
+          <p>Monthly monitoring for new exposure signals, with alerting and a short intelligence brief.</p>
+          <ul>
+            <li>New impersonation domains/pages</li>
+            <li>New exposure indicators</li>
+            <li>Monthly recommendations</li>
+          </ul>
         </div>
       </div>
+
+      <details style="margin-top:14px;">
+        <summary>Show the “what we do NOT do” list (important)</summary>
+        <ul>
+          <li><b>No hacking:</b> we do not test your infrastructure without explicit permission and scope (this is not pentesting).</li>
+          <li><b>No infiltration:</b> we do not join private criminal groups or “go undercover.”</li>
+          <li><b>No purchases:</b> we do not buy stolen data or credentials.</li>
+          <li><b>No guarantees:</b> we cannot guarantee criminals won’t target you; we reduce blind spots and response time.</li>
+          <li><b>No magic takedowns:</b> we can guide takedowns, but platforms/hosts decide timelines.</li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- DELIVERABLES -->
+    <div id="deliverables" class="section reveal">
+      <h2>Deliverables (exact outputs)</h2>
+      <p class="lead">
+        You don’t pay for “research time.” You pay for deliverables: evidence, prioritization, and a response plan your team can execute.
+      </p>
+
+      <div class="cols3">
+        <div class="box">
+          <h3>Executive Exposure Report (PDF)</h3>
+          <p>A structured report designed for decision-makers and operators.</p>
+          <ul>
+            <li>Top risks (ranked)</li>
+            <li>Evidence summary (what we saw and why it matters)</li>
+            <li>Severity scoring + recommended timeline</li>
+            <li>Action list with owners (Ops / IT / Eng / CX)</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h3>Evidence Pack</h3>
+          <p>Supporting artifacts to help your team validate and act quickly.</p>
+          <ul>
+            <li>Indicators: domains, URLs, metadata where lawful</li>
+            <li>Screenshots (when applicable)</li>
+            <li>Registration/hosting context for impersonation</li>
+            <li>Notes on confidence and limitations</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h3>Response Playbooks</h3>
+          <p>Step-by-step response guides for common findings.</p>
+          <ul>
+            <li>If credential exposure is found → reset/MFA sequence</li>
+            <li>If impersonation is found → takedown workflow</li>
+            <li>If phishing targets customers → comms + controls</li>
+            <li>If fraud signals appear → mitigation checklist</li>
+          </ul>
+        </div>
+      </div>
+
+      <details style="margin-top:14px;">
+        <summary>Show a sample report outline (what’s inside)</summary>
+        <div class="cols2" style="margin-top:12px;">
+          <div class="box">
+            <h3>Report Sections</h3>
+            <ul>
+              <li>1. Executive Summary (1 page)</li>
+              <li>2. Findings Dashboard (severity, confidence, impact)</li>
+              <li>3. Credential Exposure (evidence + actions)</li>
+              <li>4. Impersonation & Phishing (evidence + takedown plan)</li>
+              <li>5. Fraud/Abuse Signals (indicators + mitigation)</li>
+              <li>6. Recommended Controls (quick wins vs longer-term)</li>
+              <li>7. Appendix (definitions + evidence references)</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>What makes it usable</h3>
+            <ul>
+              <li><b>Confidence labels:</b> what we know vs what we suspect</li>
+              <li><b>Owner mapping:</b> who should do what (Ops/IT/Eng/CX)</li>
+              <li><b>Priority sequencing:</b> fix order matters</li>
+              <li><b>Minimal jargon:</b> clear “why” and “now what”</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- METHODOLOGY -->
+    <div id="methodology" class="section reveal">
+      <h2>Methodology (how we do it)</h2>
+      <p class="lead">
+        Obscurum uses a repeatable workflow: <b>collect identifiers → scan lawful sources → validate → prioritize → deliver actions</b>.
+        The point is not “more data.” It’s <b>better decisions</b>.
+      </p>
+
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>What happens</th>
+              <th>What you provide</th>
+              <th>What you get</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Intake</b><div class="muted">15 minutes</div></td>
+              <td>We collect brand identifiers and define scope (domains, email patterns, critical accounts, regions).</td>
+              <td>Domains, brand terms, email patterns, optional IT contact.</td>
+              <td>Confirmed scope + timeline + start checklist.</td>
+            </tr>
+            <tr>
+              <td><b>Scanning</b><div class="muted">3–7 days</div></td>
+              <td>We query lawful intelligence sources and monitoring streams for exposure indicators tied to your identifiers.</td>
+              <td>No admin access required for base package.</td>
+              <td>Draft findings list with confidence notes.</td>
+            </tr>
+            <tr>
+              <td><b>Validation</b><div class="muted">Ongoing</div></td>
+              <td>We de-duplicate, add context, and reduce false positives. We flag “unknowns.”</td>
+              <td>Optional: confirm internal systems/tools used.</td>
+              <td>Clean, actionable findings (not noise).</td>
+            </tr>
+            <tr>
+              <td><b>Prioritization</b><div class="muted">1–2 days</div></td>
+              <td>We score by impact/likelihood and map to action owners.</td>
+              <td>Optional: business priorities (brand, finance, customer trust).</td>
+              <td>Ranked actions list + severity levels.</td>
+            </tr>
+            <tr>
+              <td><b>Delivery</b><div class="muted">Call + PDFs</div></td>
+              <td>We deliver report, evidence pack, and playbooks. We walk you through decisions and next steps.</td>
+              <td>Availability for walkthrough call.</td>
+              <td>Final report + evidence + response plan.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cols3" style="margin-top:14px;">
+        <div class="box">
+          <h3>Confidence & Limitations</h3>
+          <p>We label confidence. We don’t pretend OSINT is perfect.</p>
+          <ul>
+            <li>High confidence = corroborated indicators</li>
+            <li>Medium = plausible but needs confirmation</li>
+            <li>Low = informational, monitor only</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Evidence-First Reporting</h3>
+          <p>Every high/critical finding includes evidence and the “so what.”</p>
+          <ul>
+            <li>What we observed</li>
+            <li>Likely attacker goal</li>
+            <li>Probable impact</li>
+            <li>Fast mitigation steps</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Operator-Friendly Output</h3>
+          <p>You get an action plan aligned to how work actually happens.</p>
+          <ul>
+            <li>Owner mapping</li>
+            <li>Sequenced tasks</li>
+            <li>Quick wins vs deep fixes</li>
+          </ul>
+        </div>
+      </div>
+
+      <details style="margin-top:14px;">
+        <summary>Show typical response playbooks (examples)</summary>
+        <div class="cols2" style="margin-top:12px;">
+          <div class="box">
+            <h3>If credential exposure is found</h3>
+            <ul>
+              <li>Force reset on affected accounts (prioritized list)</li>
+              <li>Enable MFA everywhere possible</li>
+              <li>Revoke sessions / tokens where possible</li>
+              <li>Rotate API keys / secrets if exposure risk exists</li>
+              <li>Audit admin accounts and payment/fulfillment tools first</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>If an impersonation domain is found</h3>
+            <ul>
+              <li>Validate the domain and hosting details</li>
+              <li>File takedown requests (host/registrar/platform)</li>
+              <li>Update customer-facing warnings where needed</li>
+              <li>Improve email auth (SPF/DKIM/DMARC) if relevant</li>
+              <li>Monitor for re-registration and variants</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- WHO IT'S FOR -->
+    <div id="fit" class="section reveal">
+      <h2>Who this is for</h2>
+      <p class="lead">
+        Obscurum is designed for businesses that have real exposure and want fast clarity.
+        Best fit: <b>online revenue</b>, <b>brand trust matters</b>, <b>accounts and customers are targets</b>.
+      </p>
+
+      <div class="cols4">
+        <div class="box">
+          <h3>E-commerce / DTC</h3>
+          <p>Brand impersonation, refund fraud, chargebacks, and customer phishing risks.</p>
+        </div>
+        <div class="box">
+          <h3>SaaS / Platforms</h3>
+          <p>Credential stuffing, ATO, support overload, and downstream customer risk.</p>
+        </div>
+        <div class="box">
+          <h3>Agencies</h3>
+          <p>Shared access, vendor risk, and reputation damage across clients.</p>
+        </div>
+        <div class="box">
+          <h3>Professional Services</h3>
+          <p>Client trust, sensitive data, impersonation and credential exposure risk.</p>
+        </div>
+      </div>
+
+      <details style="margin-top:14px;">
+        <summary>Show “not a fit” cases</summary>
+        <ul>
+          <li>If you want penetration testing or compliance certification → this is not that.</li>
+          <li>If you want a 24/7 SOC with guaranteed response SLAs → this is not that.</li>
+          <li>If you want us to “remove everything from the dark web” → not realistic.</li>
+          <li>If you want illegal infiltration or offensive activity → we won’t do it.</li>
+        </ul>
+      </details>
     </div>
 
     <!-- PROCESS -->
-    <div id="process" class="section">
-      <h2>Process</h2>
-      <p class="lead">Fast, scoped, and designed for operators who want answers—not homework.</p>
+    <div id="process" class="section reveal">
+      <h2>Process & timeline</h2>
+      <p class="lead">Fast, scoped, and built for execution. Most clients complete the scan and walkthrough inside a week.</p>
 
       <div class="process">
         <div class="step">
           <div class="n">1</div>
-          <b>Intake (15 minutes)</b>
-          <p style="margin:8px 0 0; color:var(--muted); line-height:1.65; font-size:14px;">
-            We collect brand identifiers: domains, email patterns, brand terms, key products, and impersonation targets.
-          </p>
+          <b>Kickoff & scope (Day 0–1)</b>
+          <p>15-minute intake. We define targets, brand terms, and key systems that matter most (payments, support, admin, email, ads).</p>
         </div>
         <div class="step">
           <div class="n">2</div>
-          <b>Exposure scan (3–7 days)</b>
-          <p style="margin:8px 0 0; color:var(--muted); line-height:1.65; font-size:14px;">
-            We review lawful datasets and monitoring streams to identify credible cybercrime signals tied to your business.
-          </p>
+          <b>Scanning & triage (Day 1–5)</b>
+          <p>We search lawful intelligence sources for credible exposure signals. We remove noise and add confidence notes.</p>
         </div>
         <div class="step">
           <div class="n">3</div>
-          <b>Evidence + prioritization</b>
-          <p style="margin:8px 0 0; color:var(--muted); line-height:1.65; font-size:14px;">
-            We separate noise from actionable threats and explain the likely attacker path and impact.
-          </p>
+          <b>Reporting (Day 4–7)</b>
+          <p>We build the report, evidence pack, and action playbooks. You get a prioritized plan with owners and sequencing.</p>
         </div>
         <div class="step">
           <div class="n">4</div>
-          <b>Action plan + optional monitoring</b>
-          <p style="margin:8px 0 0; color:var(--muted); line-height:1.65; font-size:14px;">
-            You get the report + playbook. We can coordinate fixes with your IT provider. Ongoing monitoring is optional.
-          </p>
+          <b>Walkthrough (Day 5–10)</b>
+          <p>Live review. We answer questions and align actions with your team (or your IT provider/MSP).</p>
         </div>
       </div>
     </div>
 
     <!-- PRICING -->
-    <div id="pricing" class="section">
+    <div id="pricing" class="section reveal">
       <h2>Pricing</h2>
-      <p class="lead">Flat fees. Clear scope. Upgrade only if you see value.</p>
+      <p class="lead">Flat fees. Clear scope. Optional monitoring. No endless consulting retainer unless you want it.</p>
 
       <div class="pricing">
         <div class="price">
           <h3>Starter Scan</h3>
           <div class="amt">$1,500 <span>one-time</span></div>
-          <div style="color:var(--muted); font-size:14px; line-height:1.65;">
-            Quick visibility for small teams.
+          <div class="muted" style="font-size:14px; line-height:1.75;">
+            Fast visibility for small teams that want a clean “are we exposed?” answer.
           </div>
           <ul class="ul">
             <li>Credential exposure review (domain-tied)</li>
-            <li>Basic impersonation scan (domains + social)</li>
+            <li>Basic impersonation scan (domains + obvious vectors)</li>
             <li>Prioritized findings + action list</li>
             <li>30-min walkthrough call</li>
           </ul>
+          <div class="smallNote">Typical turnaround: 3–5 days. Best for early-stage brands.</div>
         </div>
 
         <div class="price featured">
           <h3>Exposure Sprint</h3>
           <div class="amt">$2,500 <span>one-time</span></div>
-          <div style="color:var(--muted); font-size:14px; line-height:1.65;">
-            Best value. Deep scan + evidence + response playbook.
+          <div class="muted" style="font-size:14px; line-height:1.75;">
+            Most popular. Deeper scan + evidence pack + response playbooks.
           </div>
           <ul class="ul">
             <li>Everything in Starter</li>
-            <li>Expanded leak/market signal review</li>
-            <li>Phishing & spoof infrastructure checks</li>
-            <li>Executive-ready PDF report</li>
+            <li>Expanded exposure checks + structured triage</li>
+            <li>Phishing/spoof infrastructure checks</li>
+            <li>Executive-ready PDF report + evidence pack</li>
             <li>60-min walkthrough call</li>
           </ul>
+          <div class="smallNote">Typical turnaround: ~7 days. Best for revenue-sensitive brands.</div>
         </div>
 
         <div class="price">
           <h3>Monitoring</h3>
           <div class="amt">$950 <span>/ month</span></div>
-          <div style="color:var(--muted); font-size:14px; line-height:1.65;">
-            Ongoing alerts + monthly intelligence brief.
+          <div class="muted" style="font-size:14px; line-height:1.75;">
+            Ongoing alerts + monthly intelligence brief so you aren’t blind next month.
           </div>
           <ul class="ul">
             <li>Continuous monitoring streams</li>
@@ -484,60 +1008,111 @@
             <li>Monthly summary + recommendations</li>
             <li>One support call/month</li>
           </ul>
+          <div class="smallNote">Best after the Exposure Sprint for continuous visibility.</div>
         </div>
       </div>
 
-      <div class="tags" style="margin-top:14px;">
-        <span class="tag">Best fit: 5–200 employees</span>
-        <span class="tag">Online revenue + brand risk</span>
-        <span class="tag">No security team required</span>
-      </div>
+      <details style="margin-top:14px;">
+        <summary>Show add-ons (for advanced needs)</summary>
+        <div class="cols3" style="margin-top:12px;">
+          <div class="box">
+            <h3>Brand Abuse Takedown Support</h3>
+            <p>We help you file and track takedown requests and reappearance monitoring.</p>
+            <ul>
+              <li>Registrar/host/platform workflows</li>
+              <li>Tracking + follow-ups</li>
+              <li>Escalation guidance</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Executive Briefing</h3>
+            <p>Board-style briefing summarizing risk and decisions, plus a quarterly plan.</p>
+            <ul>
+              <li>Risk posture snapshot</li>
+              <li>Priority controls roadmap</li>
+              <li>Budget alignment recommendations</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Vendor / Partner Exposure Review</h3>
+            <p>Assess vendor exposure indicators that could leak access to your environment.</p>
+            <ul>
+              <li>Vendor domain exposure checks</li>
+              <li>Access risk mapping</li>
+              <li>Mitigation steps</li>
+            </ul>
+          </div>
+        </div>
+      </details>
     </div>
 
     <!-- FAQ -->
-    <div id="faq" class="section">
+    <div id="faq" class="section reveal">
       <h2>FAQ</h2>
-      <p class="lead">The questions founders ask before they buy (and the straight answers).</p>
+      <p class="lead">Straight answers. No hype. No vague promises.</p>
 
       <div class="faq">
         <details>
           <summary>Is this legal?</summary>
-          <p>Yes. Obscurum uses lawful OSINT and threat intelligence methods. We do not hack systems, infiltrate groups, or purchase stolen data.</p>
+          <p>Yes. Obscurum uses lawful OSINT and threat intelligence methods. We do not hack systems, infiltrate private groups, or purchase stolen data.</p>
         </details>
 
         <details>
           <summary>Can you remove stolen data from the dark web?</summary>
-          <p>No one can reliably erase criminal copies. What we do is reduce impact: resets, MFA enforcement, access revocation, and takedowns where feasible (impersonation/phishing).</p>
+          <p>No one can reliably erase criminal copies. What we do is reduce impact: resets, MFA enforcement, session/token revocation, and takedowns where feasible (impersonation/phishing).</p>
         </details>
 
         <details>
           <summary>What do you need from us?</summary>
-          <p>Usually: your domains, email patterns (e.g., @brand.com), brand terms, and a point of contact. The base offerings typically do not require admin access.</p>
+          <p>Usually: domains, brand terms, email patterns (e.g., @brand.com), and a point of contact. Base packages typically do not require admin access.</p>
         </details>
 
         <details>
           <summary>What if you find nothing?</summary>
-          <p>That’s still useful. You’ll get a report documenting what was checked and the top controls to keep exposure low.</p>
+          <p>That’s still useful. You receive a report documenting what was checked and a prioritized prevention checklist to keep exposure low.</p>
         </details>
 
         <details>
           <summary>How fast are results?</summary>
-          <p>Starter is typically 3–5 days. Exposure Sprint is typically within 7 days for most SMBs.</p>
+          <p>Starter is typically 3–5 days. Exposure Sprint is typically ~7 days for most SMBs (complex brands may take longer).</p>
         </details>
 
         <details>
           <summary>Will you work with our IT provider/MSP?</summary>
-          <p>Yes. We can hand off remediation steps and coordinate on takedown requests and internal control improvements.</p>
+          <p>Yes. We can hand off remediation steps and coordinate on takedown requests and control improvements.</p>
+        </details>
+
+        <details>
+          <summary>Do you do penetration testing or internal security audits?</summary>
+          <p>Not in the base Obscurum offering. This service is focused on external cybercrime visibility. If you need pentesting, we can refer you or discuss a separate scoped engagement.</p>
+        </details>
+
+        <details>
+          <summary>What’s the biggest value of this service?</summary>
+          <p>Speed. Visibility. Decision clarity. Most teams are blind to what’s happening outside their perimeter. Obscurum helps you respond before damage spreads.</p>
         </details>
       </div>
+
+      <details style="margin-top:14px;">
+        <summary>Glossary (for non-security teams)</summary>
+        <ul>
+          <li><b>ATO (Account Takeover):</b> attacker gains access to user accounts using stolen credentials.</li>
+          <li><b>Impersonation domain:</b> a look-alike domain used to trick customers or staff.</li>
+          <li><b>Credential stuffing:</b> automated login attempts using leaked credentials across many sites.</li>
+          <li><b>OSINT:</b> Open Source Intelligence (lawful information gathering from open sources and permissible datasets).</li>
+        </ul>
+      </details>
     </div>
 
     <!-- CONTACT -->
-    <div id="contact" class="section">
+    <div id="contact" class="section reveal">
       <div class="callout">
         <div>
-          <h2 style="margin:0 0 8px;">Get your exposure scan</h2>
-          <p>Book a quick call. If you’re a fit, we start immediately. If you’re not, we’ll tell you straight.</p>
+          <h2>Get your exposure scan</h2>
+          <p>
+            Book a quick call. If you’re a fit, we start immediately. If you’re not, we’ll tell you straight.
+            <br><span class="muted2">Most clients complete intake → scan → walkthrough inside 7–10 days.</span>
+          </p>
         </div>
         <div class="ctaRow" style="margin:0;">
           <a class="btn btnPrimary" href="https://calendly.com/your-calendly/obscurum-intro" target="_blank" rel="noreferrer">Book a 15-min call</a>
@@ -545,30 +1120,71 @@
         </div>
       </div>
 
-      <!-- OPTIONAL: working form via Formspree -->
-      <p class="lead" style="margin-top:16px;">
-        Prefer a form? Use this (free) Formspree endpoint. Replace <b>YOUR_ID</b> below after creating your form.
+      <p class="lead" style="margin-top:18px;">
+        Prefer a form? Use a free Formspree endpoint. Create one and replace <b>YOUR_ID</b> below.
       </p>
 
       <form action="https://formspree.io/f/YOUR_ID" method="POST">
         <input name="name" placeholder="Name" required />
         <input type="email" name="email" placeholder="Email" required />
-        <textarea name="message" placeholder="What’s your business + what are you worried about? (leaks, impersonation, fraud, phishing…)" required></textarea>
+        <select name="business_type" required>
+          <option value="" disabled selected>Business type</option>
+          <option>E-commerce / DTC</option>
+          <option>SaaS / Platform</option>
+          <option>Agency</option>
+          <option>Professional Services</option>
+          <option>Other</option>
+        </select>
+        <select name="primary_concern" required>
+          <option value="" disabled selected>Primary concern</option>
+          <option>Credential leaks / account takeover</option>
+          <option>Impersonation domains / phishing</option>
+          <option>Fraud / chargebacks / abuse</option>
+          <option>General “are we exposed?”</option>
+        </select>
+        <textarea name="message" placeholder="Tell us your domain + what happened (or what you're worried about). If you’ve seen specific suspicious domains/pages, paste them here." required></textarea>
+
         <div class="formActions">
           <button class="btn btnPrimary" type="submit">Send</button>
           <a class="btn btnGhost" href="#pricing">See packages</a>
         </div>
       </form>
+
+      <div class="hint">
+        <b>Privacy:</b> Provide only information you’re comfortable sharing via email/form. For sensitive details, book the call.
+      </div>
     </div>
 
+    <!-- FOOTER -->
     <div class="footer">
-      <div><b>Legal & Ethics:</b> Obscurum provides lawful OSINT and threat intelligence services. We do not hack systems, buy stolen data, or facilitate wrongdoing.</div>
-      <div style="margin-top:10px;">© <span id="yr"></span> Obscurum. All rights reserved.</div>
+      <div>
+        <div><b>Legal & Ethics:</b> Obscurum provides lawful OSINT and threat intelligence services. We do not hack systems, buy stolen data, or facilitate wrongdoing.</div>
+        <div style="margin-top:10px;">© <span id="yr"></span> Obscurum. All rights reserved.</div>
+      </div>
+
+      <div class="social" aria-label="Social links">
+        <a href="#" title="X / Twitter (add your link)">X</a>
+        <a href="#" title="LinkedIn (add your link)">LinkedIn</a>
+        <a href="#" title="Email">Email</a>
+      </div>
     </div>
   </div>
 
   <script>
+    // Year
     document.getElementById("yr").textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const els = Array.from(document.querySelectorAll('.reveal'));
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
   </script>
 </body>
 </html>
